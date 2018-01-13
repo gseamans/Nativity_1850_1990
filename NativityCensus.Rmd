@@ -3,7 +3,10 @@ title: "Nativity"
 subtitle: "Coursera Data Products Week 3"
 author: "Gary R Seamans"
 date: "January 13, 2018"
-output: ioslides_presentation
+output: 
+    ioslides_presentation:
+        widescreen: true
+        smaller: true
 ---
 
 ```{r setup, include=FALSE}
@@ -19,7 +22,7 @@ was exported from Google Chrome using the *table to csv* extension.
 
 The code can be downloaded from [GitHub Repository](https://github.com/gseamans/Nativity_1850_1990)
 
-## Foreign-Born Population 1850 - 1990
+## Foreign-Born Population 1850 - 1990 {.smaller}
 
 ```{r NativityPlot}
 nat <- read.csv(file = "data/censusNativity.csv", sep = "|", header = TRUE)
