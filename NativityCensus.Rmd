@@ -1,0 +1,39 @@
+---
+title: "Nativity"
+subtitle: "Coursera Data Products Week 3"
+author: "Gary R Seamans"
+date: "January 13, 2018"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(plotly)
+library(readr)
+```
+
+## Data
+
+The data for this presentation was extracted from [Census Nativity information 1850 - 1990](https://www.census.gov/population/www/documentation/twps0029/tab02.html). The data
+was exported from Google Chrome using the *table to csv* extension.
+
+The code can be downloaded from [GitHub Repository](https://github.com/gseamans/Nativity_1850_1990)
+
+## Foreign-Born Population 1850 - 1990
+
+```{r NativityPlot}
+nat <- read.csv(file = "data/censusNativity.csv", sep = "|", header = TRUE)
+nat$Year <- as.factor(nat$Year)
+nat[,2:9] <- lapply(nat[,2:9],parse_number)
+
+p <- plot_ly(data = nat, y = ~Total, x = ~Year, name = "Total", type = "scatter", mode = "lines") %>% 
+    add_lines(y = ~Africa, x = ~Year, name = "Africa") %>%
+    add_lines(y = ~Asia, x = ~Year, name = "Asia") %>%
+    add_lines(y = ~Europe, x = ~Year, name = "Europe") %>%
+    add_lines(y = ~LatinAmerica, x = ~Year, name = "LatinAmerica") %>%
+    add_lines(y = ~NorthernAmerica, x = ~Year, name = "NorthernAmerica") %>%
+    add_lines(y = ~Oceania, x = ~Year, name = "Oceania") %>%
+    add_lines(y = ~NotReported, x = ~Year, name ="NotReported" )
+p
+```
+
